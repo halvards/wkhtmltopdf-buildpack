@@ -14,6 +14,9 @@ WKHTMLTOPDF_BINARIES="$WKHTMLTOPDF_PATH/usr/local/bin"
 echo "-----> Downloading wkhtmltopdf Debian package"
 curl -L $WKHTMLTOPDF_URL -o $WKHTMLTOPDF_PKG
 
+echo "-----> Installing wkhtmltopdf prerequisites"
+apt-get install -y fontconfig libjpeg-turbo8 xfonts-75dpi
+
 echo "-----> Unpacking Debian package"
 dpkg -x $WKHTMLTOPDF_PKG $WKHTMLTOPDF_PATH
 
