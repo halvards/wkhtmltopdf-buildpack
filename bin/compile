@@ -4,7 +4,8 @@ set -e
 
 BIN_PATH="$1/bin"
 TMP_PATH="$1/tmp"
-mkdir -p $BIN_PATH $TMP_PATH
+FONTS_PATH="$1/.fonts"
+mkdir -p $BIN_PATH $TMP_PATH $FONTS_PATH
 
 WKHTMLTOPDF_URL="http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb"
 WKHTMLTOPDF_PKG="$TMP_PATH/wkhtmltopdf.deb"
@@ -18,8 +19,7 @@ echo "-----> Unpacking fonts-dejavu-core"
 dpkg -x $TMP_PATH/fonts-dejavu-core.deb $TMP_PATH/fonts-dejavu-core
 
 echo "-----> Moving fonts to the right place"
-mkdir -p $HOME/.fonts
-mv $TMP_PATH/fonts-dejavu-core/usr/share/fonts/truetype/dejavu/*.ttf $HOME/.fonts
+mv $TMP_PATH/fonts-dejavu-core/usr/share/fonts/truetype/dejavu/*.ttf $FONTS_PATH/
 
 echo "-----> Downloading wkhtmltopdf Debian package"
 curl -L $WKHTMLTOPDF_URL -o $WKHTMLTOPDF_PKG
