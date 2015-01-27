@@ -12,10 +12,10 @@ WKHTMLTOPDF_PATH="$TMP_PATH/wkhtmltopdf"
 WKHTMLTOPDF_BINARIES="$WKHTMLTOPDF_PATH/usr/local/bin"
 
 echo "-----> Downloading fonts-dejavu-core"
-aptitude download fonts-dejavu-core $TMP_PATH
+curl --location --output $TMP_PATH/fonts-dejavu-core.deb http://us.archive.ubuntu.com/ubuntu/pool/main/f/fonts-dejavu/fonts-dejavu-core_2.34-1ubuntu1_all.deb
 
 echo "-----> Unpacking fonts-dejavu-core"
-dpkg -x $TMP_PATH/fonts-dejavu-core*.deb $TMP_PATH/fonts-dejavu-core
+dpkg -x $TMP_PATH/fonts-dejavu-core.deb $TMP_PATH/fonts-dejavu-core
 
 echo "-----> Moving fonts to the right place"
 mkdir -p $HOME/.fonts
