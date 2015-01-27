@@ -11,11 +11,18 @@ WKHTMLTOPDF_PKG="$TMP_PATH/wkhtmltopdf.deb"
 WKHTMLTOPDF_PATH="$TMP_PATH/wkhtmltopdf"
 WKHTMLTOPDF_BINARIES="$WKHTMLTOPDF_PATH/usr/local/bin"
 
+echo "-----> Downloading fonts-dejavu-core"
+aptitude download fonts-dejavu-core $TMP_PATH
+
+echo "-----> Unpacking fonts-dejavu-core"
+dpkg -x $TMP_PATH/fonts-dejavu-core*.deb $TMP_PATH/fonts-dejavu-core
+
+echo "-----> Moving fonts to the right place"
+mkdir -p $HOME/.fonts
+mv $TMP_PATH/fonts-dejavu-core/usr/share/fonts/truetype/dejavu/*.ttf $HOME/.fonts
+
 echo "-----> Downloading wkhtmltopdf Debian package"
 curl -L $WKHTMLTOPDF_URL -o $WKHTMLTOPDF_PKG
-
-echo "-----> Installing wkhtmltopdf prerequisites"
-apt-get install -y fontconfig libjpeg-turbo8 xfonts-75dpi
 
 echo "-----> Unpacking Debian package"
 dpkg -x $WKHTMLTOPDF_PKG $WKHTMLTOPDF_PATH
